@@ -1,29 +1,82 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'product.dart';
+
+class Product {
+  final int id;
+  final String name;
+  final double price;
+  int quantity;
+
+  Product({
+    required this.id,
+    required this.name,
+    required this.price,
+    this.quantity = 1,
+  });
+
+  Product copyWith({
+    int? quantity,
+  }) {
+    return Product(
+      id: id,
+      name: name,
+      price: price,
+      quantity: quantity ?? this.quantity,
+    );
+  }
+}
 
 class ProductNotifier extends ChangeNotifier {
   final List<Product> _products = [
-    Product(id: 1, name: 'Producto 1', price: 10.99),
-    Product(id: 2, name: 'Producto 2', price: 15.50),
-    // Falta agregar más productos aquí minimo son 10
+    Product(id: 1, name: 'Producto', price: 20.000),
+    Product(id: 2, name: 'Producto', price: 4.000),
+    Product(id: 3, name: 'Producto', price: 3.000),
+    Product(id: 4, name: 'Producto', price: 4.500),
+    Product(id: 5, name: 'Producto', price: 6.000),
+    Product(id: 6, name: 'Producto', price: 10.000),
+    Product(id: 7, name: 'Producto', price: 1.500),
+    Product(id: 8, name: 'Producto', price: 6.000),
+    Product(id: 9, name: 'Producto', price: 5.000),
+    Product(id: 10, name: 'Producto', price: 300),
   ];
 
-  List<Product> get products => _products;
+  final List<Product> _cart = [];
 
-  void addToCart(Product product) {
-    _products.add(product);
+  List<Product> get products => _products;
+  List<Product> get cart => _cart;
+
+  void addToCart(BuildContext context, Product product) {
+    print('Agregando al carrito: ${product.name}');
+
+    final existingProduct = _cart.firstWhere((p) => p.id == product.id, orElse: () => Product(id: -1, name: 'Not Found', price: 0.0, quantity: 0));
+    if (existingProduct.id != -1) {
+      _cart.add(existingProduct.copyWith(quantity: existingProduct.quantity + 1));
+    } else {
+      _cart.add(product.copyWith());
+    }
+
     notifyListeners();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.pushNamed(context, '/cart');
+    });
   }
 
   void removeFromCart(Product product) {
-    _products.removeWhere((p) => p.id == product.id);
-    notifyListeners();
+    print('Eliminando del carrito: ${product.name}');
+
+    final cartProduct = _cart.firstWhere((p) => p.id == product.id, orElse: () => Product(id: -1, name: 'Not Found', price: 0.0, quantity: 0));
+    if (cartProduct.id != -1) {
+      if (cartProduct.quantity > 1) {
+        _cart.remove(cartProduct);
+        _cart.add(cartProduct.copyWith(quantity: cartProduct.quantity - 1));
+      } else {
+        _cart.remove(cartProduct);
+      }
+      notifyListeners();
+    } else {
+      print('Producto no encontrado en el carrito');
+    }
   }
 
-  double get total => _products.fold(0.0, (total, product) => total + product.price * product.quantity);
+  double get total => _cart.fold(0.0, (total, product) => total + product.price * product.quantity);
 }
-
-final productProvider = ChangeNotifierProvider<ProductNotifier>(
-  create: (context) => ProductNotifier(),
-);

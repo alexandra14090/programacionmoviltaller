@@ -5,7 +5,7 @@ import 'cart_screen.dart';
 import 'product_provider.dart';
 
 void main() {
-  runApp( 
+  runApp(
     ChangeNotifierProvider(
       create: (_) => ProductNotifier(),
       child: MyApp(),
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Inventario de productos',
-      debugShowCheckedModeBanner: false, // Oculta la etiqueta "Debug"
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case '/cart':

@@ -9,36 +9,27 @@ class InventoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: Container(
-          color: Colors.lightBlue[100], 
-        ),
-        title: const Text(
-          'Inventario de productos',
-          style: TextStyle(color: Color.fromARGB(255, 19, 19, 19)), 
-        ),
+        title: const Text('Inventario de productos'),
       ),
-      body: ChangeNotifierProvider(
-        create: (_) => ProductNotifier(),
-        child: Consumer<ProductNotifier>(
-          builder: (context, productNotifier, child) {
-            return ListView.builder(
-              itemCount: productNotifier.products.length,
-              itemBuilder: (context, index) {
-                final product = productNotifier.products[index];
-                return ListTile(
-                  title: Text(product.name),
-                  subtitle: Text('Precio: \$${product.price.toStringAsFixed(2)}'),
-                  trailing: ElevatedButton(
-                    onPressed: () {
-                      productNotifier.addToCart(product);
-                    },
-                    child: const Text('Agregar al carrito'),
-                  ),
-                );
-              },
-            );
-          },
-        ),
+      body: Consumer<ProductNotifier>(
+        builder: (context, productNotifier, child) {
+          return ListView.builder(
+            itemCount: productNotifier.products.length,
+            itemBuilder: (context, index) {
+              final product = productNotifier.products[index];
+              return ListTile(
+                title: Text(product.name),
+                subtitle: Text('Precio: \$${product.price.toStringAsFixed(2)}'),
+                trailing: ElevatedButton(
+                  onPressed: () {
+                    productNotifier.addToCart(context, product);
+                  },
+                  child: const Text('Agregar al carrito'),
+                ),
+              );
+            },
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
