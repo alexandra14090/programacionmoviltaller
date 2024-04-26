@@ -30,7 +30,7 @@ class ProductNotifier extends ChangeNotifier {
     Product(id: 1, name: 'autobus', price: 20.000),
     Product(id: 2, name: 'carro', price: 4.000),
     Product(id: 3, name: 'moto', price: 3.000),
-    Product(id: 4, name: 'bicileta', price: 4.500),
+    Product(id: 4, name: 'bicicleta', price: 4.500),
     Product(id: 5, name: 'helado', price: 6.000),
     Product(id: 6, name: 'triciclo', price: 10.000),
     Product(id: 7, name: 'lavador', price: 1.500),
