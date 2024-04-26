@@ -27,16 +27,16 @@ class Product {
 
 class ProductNotifier extends ChangeNotifier {
   final List<Product> _products = [
-    Product(id: 1, name: 'Producto', price: 20.000),
-    Product(id: 2, name: 'Producto', price: 4.000),
-    Product(id: 3, name: 'Producto', price: 3.000),
-    Product(id: 4, name: 'Producto', price: 4.500),
-    Product(id: 5, name: 'Producto', price: 6.000),
-    Product(id: 6, name: 'Producto', price: 10.000),
-    Product(id: 7, name: 'Producto', price: 1.500),
-    Product(id: 8, name: 'Producto', price: 6.000),
-    Product(id: 9, name: 'Producto', price: 5.000),
-    Product(id: 10, name: 'Producto', price: 300),
+    Product(id: 1, name: 'Producto1', price: 20.000),
+    Product(id: 2, name: 'Producto2', price: 4.000),
+    Product(id: 3, name: 'Producto3', price: 3.000),
+    Product(id: 4, name: 'Producto4', price: 4.500),
+    Product(id: 5, name: 'Producto5', price: 6.000),
+    Product(id: 6, name: 'Producto6', price: 10.000),
+    Product(id: 7, name: 'Producto7', price: 1.500),
+    Product(id: 8, name: 'Producto8', price: 6.000),
+    Product(id: 9, name: 'Producto9', price: 5.000),
+    Product(id: 10, name: 'Producto10', price: 300),
   ];
 
   final List<Product> _cart = [];
