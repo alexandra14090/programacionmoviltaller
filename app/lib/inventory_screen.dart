@@ -10,6 +10,7 @@ class InventoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Inventario de productos'),
+        backgroundColor: Colors.lightBlue[100], // Establece el color de fondo azul claro
       ),
       body: Consumer<ProductNotifier>(
         builder: (context, productNotifier, child) {

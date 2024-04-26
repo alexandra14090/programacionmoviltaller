@@ -10,6 +10,7 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Carrito de compras'),
+        backgroundColor: Colors.lightBlue[100], // Establece el color de fondo azul claro
       ),
       body: Consumer<ProductNotifier>(
         builder: (context, productNotifier, child) {
